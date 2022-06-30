@@ -1,5 +1,6 @@
 import tekore as tk
 import os
+import pandas as pd
 
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
@@ -32,9 +33,9 @@ def get_saved_playlists():
     """:returns a list of all user's playlists, 'PlaylistTrackPaging'"""
     user_id = spotify.current_user().id
     user_playlists = spotify.playlists(user_id=user_id)
-    playlists_ids = [playlist.id for playlist in user_playlists.items]
+    playlists_ids = [pl.id for pl in user_playlists.items]
 
-    return [spotify.playlist(playlist_id).tracks for playlist_id in playlists_ids]
+    return [spotify.playlist(playlist_id) for playlist_id in playlists_ids]
 
 
 def playlist_unpack(track_paging):
@@ -43,15 +44,34 @@ def playlist_unpack(track_paging):
     for item in spotify.all_items(track_paging):
         contents.append(
             {
-                'track_name': item.track.name,
-                'artists': ",".join([artist.name for artist in item.track.artists]),
-                'album': item.track.album.name,
-                'duration': f"{round(item.track.duration_ms / 1000)}sec"
+                "track_name": item.track.name,
+                "artists": ",".join([artist.name for artist in item.track.artists]),
+                "album": item.track.album.name,
+                "duration": f"{round(item.track.duration_ms / 1000)}sec"
             }
         )
 
     return contents
 
 
+def save_to_csv(playlist_contents_to_save, playlist_name):
+    """saves the contents of the playlist to a /export/*name*.csv file with the given playlist name"""
+    dataframe = pd.DataFrame(playlist_contents_to_save)
+    dataframe.to_csv(f'./export/{playlist_name}.csv', encoding='utf-8', index=False)
+
+
 token = get_user_token()
 spotify = tk.Spotify(token)
+
+# creating path /export if not already exists
+if not os.path.exists('./export'):
+    os.makedirs('./export')
+
+# exporting saved tracks
+saved_tracks_contents = playlist_unpack(get_saved_tracks())
+save_to_csv(saved_tracks_contents, "saved tracks")
+
+# exporting saved playlists
+for playlist in get_saved_playlists():
+    playlist_contents = playlist_unpack(playlist.tracks)
+    save_to_csv(playlist_contents, playlist.name)
