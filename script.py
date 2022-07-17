@@ -1,6 +1,7 @@
 import tekore as tk
+from pandas import DataFrame
 import os
-import pandas as pd
+
 
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
@@ -56,7 +57,7 @@ def playlist_unpack(track_paging):
 
 def save_to_csv(playlist_contents_to_save, playlist_name):
     """saves the contents of the playlist to a /export/*name*.csv file with the given playlist name"""
-    dataframe = pd.DataFrame(playlist_contents_to_save)
+    dataframe = DataFrame(playlist_contents_to_save)
     dataframe.to_csv(f'./export/{playlist_name}.csv', encoding='utf-8', index=False)
 
 
