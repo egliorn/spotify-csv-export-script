@@ -1,5 +1,5 @@
 import tekore as tk
-from pandas import DataFrame
+import csv
 import os
 
 
@@ -41,32 +41,36 @@ def get_saved_playlists():
 
 def playlist_unpack(track_paging):
     """unpacks the contents of given 'SavedTrackPaging' or 'PlaylistTrackPaging'"""
-    contents = []
+    contents = [["track_name", "artists", "album", "duration"]]
     for item in spotify.all_items(track_paging):
         contents.append(
-            {
-                "track_name": item.track.name,
-                "artists": ",".join([artist.name for artist in item.track.artists]),
-                "album": item.track.album.name,
-                "duration": f"{round(item.track.duration_ms / 1000)}sec"
-            }
+            [
+                item.track.name,
+                ", ".join([artist.name for artist in item.track.artists]),
+                item.track.album.name,
+                f"{round(item.track.duration_ms / 1000)}sec"
+            ]
         )
 
     return contents
 
 
-def save_to_csv(playlist_contents_to_save, playlist_name):
-    """saves the contents of the playlist to a /export/*name*.csv file with the given playlist name"""
-    dataframe = DataFrame(playlist_contents_to_save)
-    dataframe.to_csv(f'./export/{playlist_name}.csv', encoding='utf-8', index=False)
+def save_to_csv(playlist_contents, playlist_name):
+    """saves the contents of the playlist to a /export pandas/*name*.csv file with the given playlist name"""
+    with open(f"./export/{playlist_name}.csv", 'w', encoding="utf-8", newline="") as csvfile:
+        writer = csv.writer(csvfile)
+        for row in playlist_contents:
+            writer.writerow(row)
+    # dataframe = DataFrame(playlist_contents_to_save)
+    # dataframe.to_csv(f'./export pandas/{playlist_name}.csv', encoding='utf-8', index=False)
 
 
 token = get_user_token()
 spotify = tk.Spotify(token)
 
-# creating path /export if not already exists
-if not os.path.exists('./export'):
-    os.makedirs('./export')
+# creating path /export pandas if not already exists
+if not os.path.exists("./export"):
+    os.makedirs("./export")
 
 # exporting saved tracks
 saved_tracks_contents = playlist_unpack(get_saved_tracks())
@@ -74,5 +78,5 @@ save_to_csv(saved_tracks_contents, "saved tracks")
 
 # exporting saved playlists
 for playlist in get_saved_playlists():
-    playlist_contents = playlist_unpack(playlist.tracks)
-    save_to_csv(playlist_contents, playlist.name)
+    contents = playlist_unpack(playlist.tracks)
+    save_to_csv(contents, playlist.name)
