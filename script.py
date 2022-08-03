@@ -2,10 +2,15 @@ import tekore as tk
 import csv
 import os
 
-
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 REDIRECT_URI = os.getenv('REDIRECT_URI')
+SCOPES = [
+    'user-read-private',  # for spotify.current_user().id
+    'user-library-read',
+    'playlist-read-collaborative',
+    'playlist-read-private',
+]
 
 
 def get_user_token():
@@ -15,7 +20,7 @@ def get_user_token():
             CLIENT_ID,
             CLIENT_SECRET,
             REDIRECT_URI,
-            scope=tk.scope.every
+            scope=SCOPES
         )
 
         conf = (CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, user_token.refresh_token)
@@ -40,10 +45,10 @@ def get_saved_playlists():
 
 
 def playlist_unpack(track_paging):
-    """unpacks the contents of given 'SavedTrackPaging' or 'PlaylistTrackPaging'"""
-    contents = [["track_name", "artists", "album", "duration"]]
+    """:returns the contents of given 'SavedTrackPaging' or 'PlaylistTrackPaging'"""
+    playlist_contents = [["track_name", "artists", "album", "duration"]]
     for item in spotify.all_items(track_paging):
-        contents.append(
+        playlist_contents.append(
             [
                 item.track.name,
                 ", ".join([artist.name for artist in item.track.artists]),
@@ -52,7 +57,7 @@ def playlist_unpack(track_paging):
             ]
         )
 
-    return contents
+    return playlist_contents
 
 
 def save_to_csv(playlist_contents, playlist_name):
@@ -61,8 +66,6 @@ def save_to_csv(playlist_contents, playlist_name):
         writer = csv.writer(csvfile)
         for row in playlist_contents:
             writer.writerow(row)
-    # dataframe = DataFrame(playlist_contents_to_save)
-    # dataframe.to_csv(f'./export pandas/{playlist_name}.csv', encoding='utf-8', index=False)
 
 
 token = get_user_token()
