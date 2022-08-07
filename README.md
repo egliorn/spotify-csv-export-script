@@ -3,7 +3,7 @@ A script, for exporting saved tracks and playlists of a Spotify user.
 Based on [Tekore](https://github.com/felix-hilden/tekore) library (Spotify Web API client).
 
 Used [scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/):
-- user-read-private, for ```spotify.current_user().id```
+- user-read-email, for ```spotify.current_user().id```
 - user-library-read 
 - playlist-read-collaborative 
 - playlist-read-private
