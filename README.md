@@ -11,8 +11,8 @@ Used [scopes](https://developer.spotify.com/documentation/general/guides/authori
 ---
 ### How it works:
 1. App opens web browser to log in Spotify
-2. After the user logs in and grants access ⇒ user copies the redirect url and pastes it into the command prompt
+2. After the user logs in and grants access -> user copies the redirect url and pastes it into the command prompt
 3. App gets Spotify user token, from pasted url *code and *state args. Then saves it into tekore.cfg
-4. Checks, if ./export exists. If not ⇒ creates ./export
+4. Checks, if ./export exists. If not -> creates ./export
 5. Gets current users Spotify saved tracks and playlists
 6. Saves saved tracks and playlists into ./export in .csv format
