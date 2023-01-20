@@ -24,22 +24,12 @@ $ cd spotify-to-csv-export-script
 ~~~bash
 $ pip install -r requirements.txt
 ~~~
-5. Войдите в https://developer.spotify.com/dashboard/ (нужен аккаунт Spotify).
-
-
-6. `CREATE AN APP` -> укажите имя приложения и описание -> `CREATE`.
-
-
-7. Появится обзор приложения, которое вы создали.
-
-
-8. Скопируйте `Client ID`, `Client Secret`(SHOW CLIENT SECRET).
-
-
-9. Вставьте значения в соответствующие переменные в начале `script.py` `CLIENT_ID`, `CLIENT_SECRET`
-
-
-10. Запустите приложение:
+4. Войдите в https://developer.spotify.com/dashboard/ (нужен аккаунт Spotify).
+5. `CREATE AN APP` -> укажите имя приложения и описание -> `CREATE`.
+6. Появится обзор приложения, которое вы создали.
+7. Скопируйте `Client ID`, `Client Secret`(SHOW CLIENT SECRET).
+8. Вставьте значения в соответствующие переменные в начале `script.py` `CLIENT_ID`, `CLIENT_SECRET`
+9. Запустите приложение:
 ~~~bash
 $ python script.py
 ~~~
