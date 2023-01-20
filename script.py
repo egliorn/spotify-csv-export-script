@@ -46,10 +46,11 @@ def get_saved_playlists():
 
 def playlist_unpack(track_paging):
     """:returns the contents of given 'SavedTrackPaging' or 'PlaylistTrackPaging'"""
-    playlist_contents = [["track_name", "artists", "album", "duration"]]
+    playlist_contents = [["track_uri", "track_name", "artists", "album", "duration"]]
     for item in spotify.all_items(track_paging):
         playlist_contents.append(
             [
+                item.track.uri,
                 item.track.name,
                 ", ".join([artist.name for artist in item.track.artists]),
                 item.track.album.name,
@@ -61,7 +62,7 @@ def playlist_unpack(track_paging):
 
 
 def save_to_csv(playlist_contents, playlist_name):
-    """saves the contents of the playlist to a /export pandas/*name*.csv file with the given playlist name"""
+    """saves the contents of the playlist to a /export/playlist_name.csv"""
     with open(f"./export/{playlist_name}.csv", 'w', encoding="utf-8", newline="") as csvfile:
         writer = csv.writer(csvfile)
         for row in playlist_contents:
@@ -71,13 +72,13 @@ def save_to_csv(playlist_contents, playlist_name):
 token = get_user_token()
 spotify = tk.Spotify(token)
 
-# creating path /export pandas if not already exists
+# creating path /export if not already exists
 if not os.path.exists("./export"):
     os.makedirs("./export")
 
 # exporting saved tracks
 saved_tracks_contents = playlist_unpack(get_saved_tracks())
-save_to_csv(saved_tracks_contents, "saved tracks")
+save_to_csv(saved_tracks_contents, "Liked Songs")
 
 # exporting saved playlists
 for playlist in get_saved_playlists():
