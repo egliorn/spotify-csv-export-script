@@ -40,13 +40,7 @@ $ python script.py
 
 При следующих запусках скрипта пункты 10, 11, 12 не нужны. Tокен Spotify будет обновляться автоматически.
 
-#### :grey_exclamation: Если вы используете MS Excel:
-
-Если вы используете Excel для открытия `playlist_name.csv`, "неанглийские" символы могут отображаться в неправильной кодировке.
-Чтобы это исправить — используйте другое приложение или попробуйте эти решения:
-- https://stackoverflow.com/a/6488070
-- [https://answers.microsoft.com/](https://answers.microsoft.com/en-us/msoffice/forum/all/how-to-open-utf-8-csv-file-in-excel-without-mis/1eb15700-d235-441e-8b99-db10fafff3c2)
-
+____
 ### Импорт экспортированных плейлистов в Spotify
 :exclamation: Работает только в приложении Spotify.
 
@@ -55,6 +49,14 @@ $ python script.py
 2. Скопируйте из `название_плейлиста.csv` значения колонны `track_uri` 
 (пример значения: `spotify:track:2FJyRsWesaxh5nOTDQWBMw`).
 3. Вставьте в страничку плейлиста.
+
+____
+#### :grey_exclamation: Если вы используете MS Excel:
+
+Если вы используете Excel для открытия `playlist_name.csv`, "неанглийские" символы могут отображаться в неправильной кодировке.
+Чтобы это исправить — используйте другое приложение или попробуйте эти решения:
+- https://stackoverflow.com/a/6488070
+- [https://answers.microsoft.com/](https://answers.microsoft.com/en-us/msoffice/forum/all/how-to-open-utf-8-csv-file-in-excel-without-mis/1eb15700-d235-441e-8b99-db10fafff3c2)
 
 ## Как это работает:
 1. Приложение открывает веб-браузер для входа в Spotify.
