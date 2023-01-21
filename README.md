@@ -41,7 +41,6 @@ Items 10, 11, 12 are not needed at the next script launches. Spotify token will 
 
 #### :grey_exclamation: Note if you are using MS Excel:
 If you use Excel to open `playlist_name.csv` - non-english characters may be displayed in incorrect encoding.
-
 To fix this – use different app or check this solutions:
 - https://stackoverflow.com/a/6488070
 - [https://answers.microsoft.com/](https://answers.microsoft.com/en-us/msoffice/forum/all/how-to-open-utf-8-csv-file-in-excel-without-mis/1eb15700-d235-441e-8b99-db10fafff3c2)

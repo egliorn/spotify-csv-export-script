@@ -43,7 +43,6 @@ $ python script.py
 #### :grey_exclamation: Если вы используете MS Excel:
 
 Если вы используете Excel для открытия `playlist_name.csv`, "неанглийские" символы могут отображаться в неправильной кодировке.
-
 Чтобы это исправить — используйте другое приложение или попробуйте эти решения:
 - https://stackoverflow.com/a/6488070
 - [https://answers.microsoft.com/](https://answers.microsoft.com/en-us/msoffice/forum/all/how-to-open-utf-8-csv-file-in-excel-without-mis/1eb15700-d235-441e-8b99-db10fafff3c2)
