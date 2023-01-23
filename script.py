@@ -6,7 +6,6 @@ CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 REDIRECT_URI = 'http://localhost:5000/callback'
 SCOPES = [
-    'user-read-email',  # for spotify.current_user().id
     'user-library-read',
     'playlist-read-collaborative',
     'playlist-read-private',

@@ -6,7 +6,6 @@
 *Читать на других языках: [English](README.md), [Русский](README.ru.md).*
 
 [Scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/) (области, к которым скрипт получает доступ):
-- user-read-email, для ```spotify.current_user().id```
 - user-library-read 
 - playlist-read-collaborative 
 - playlist-read-private
@@ -52,7 +51,6 @@ ____
 
 ____
 #### :grey_exclamation: Если вы используете MS Excel:
-
 Если вы используете Excel для открытия `playlist_name.csv`, "неанглийские" символы могут отображаться в неправильной кодировке.
 Чтобы это исправить — используйте другое приложение или попробуйте эти решения:
 - https://stackoverflow.com/a/6488070
