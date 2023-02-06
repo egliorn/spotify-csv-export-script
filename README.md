@@ -1,4 +1,4 @@
-# spotify-to-csv-export-script
+# spotify-csv-export-script
 A script, for exporting saved tracks and playlists of a Spotify user (uri, name, artists, album, duration).
 Based on [Tekore](https://github.com/felix-hilden/tekore) library (Spotify Web API client).
 
